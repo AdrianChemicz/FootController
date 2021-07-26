@@ -1,0 +1,56 @@
+[Strings]
+DriverPackageDisplayName="Foot controller serial driver"
+ManufacturerName="Hesus"
+ServiceName="Microsoft USB Serial Driver"
+pXXXX="FootControllerSerial"
+
+[DefaultInstall]
+CopyINF=FootControllerSerialDriver.inf
+
+[Version]
+DriverVer=08/31/2016,1.0.1
+Signature=$Windows NT$
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Provider=%ManufacturerName%
+CatalogFile=hesus.cat
+DriverPackageDisplayName=%DriverPackageDisplayName%
+PnpLockdown=1
+
+[Manufacturer]
+%ManufacturerName%=Models,NTx86,NTamd64,NTarm
+
+[DestinationDirs]
+DefaultDestDir=12
+FakeModemCopyFileSection=12
+
+[Models.NTx86]
+%pXXXX%=DriverInstall, USB\VID_XXXX&PID_XXXX&MI_01
+
+[Models.NTamd64]
+%p204E%=DriverInstall, USB\VID_XXXX&PID_XXXX&MI_01
+
+[Models.NTarm]
+%p204E%=DriverInstall, USB\VID_XXXX&PID_XXXX&MI_01
+
+[DriverInstall]
+Include=mdmcpq.inf,usb.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=DriverAddReg
+
+[DriverAddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.Services]
+Include=mdmcpq.inf
+AddService=usbser,0x2,DriverService
+
+[DriverService]
+DisplayName=%ServiceName%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys
+LoadOrderGroup=Base

@@ -4,7 +4,7 @@
 
 Main idea behind Footcontroller project was create device which allow user send keyboard event via foot move. This type of press key can be used in game in some circumstances it can be convienient more then standard press key on typical keyboard. When hold one button is required and press other parallel is required then footcontroller is good solution.
 
-   OveralDeviceImage.png
+![Device overview](/Doc/OveralDeviceImage.png)
 
 ## 2.Mechanical description
 
@@ -12,7 +12,8 @@ Device is connected to pc via USB cable. On device side is used USB mini connect
 Device detect foot move via laser sensor and appropriate place for sensor was selected. 
 In housing was prepared holes for power led, USB serial led, laser sensor and for USB connector. On below schematic was presented all part of device with descriptions.
 
-   DeviceInstructions2.png
+![Device view](/Doc/DeviceInstructions.png)
+
 Index | Part of device description
 ------------ | -------------
 1 | Laser sensor
@@ -23,7 +24,7 @@ Index | Part of device description
 
 On below schematic was presented all parts used in device.
 
-PartsView.png
+![Device view](/Doc/PartsView.png)
 
 ## 3.System usage
 
@@ -33,7 +34,7 @@ When device is connected to PC and serial port will be open then key event will 
 _Foot controller serial port is used to configure device and diagnose that device work properly
 Configuration is performed using AT command. When serial port will be opened send button event will be blocked on 30s from serial port opening.
 Device support below AT command.
-AT_SENSOR_ - command used to configure mode of laser sensor to decide how and when press keyboard button. Configuration of button is also possible.
+AT_SENSOR__ - command used to configure mode of laser sensor to decide how and when press keyboard button. Configuration of button is also possible.
 Command expect parameters in order the same as order of described parameters.
 1. Sensor number - parameter describe about to which sensor number will be assigned key code, mode and threshold value. Value is stored in decimal format.
 Format of parameter:
@@ -76,5 +77,5 @@ key mode, key code, threshold need for cause key event, offset value(value used 
 In device was used PCB with microcontroller LPC11U24. This PCB was created in KiCad application and all files created during board preparation was added to PCB project folder.
 Below was added connection between main microcontroller and other part of system. In device was used pololu module with ST VL53L0X laser sensor(dev code of board: irs11a). Laser sensor is reset via BC817-25W NPN transistor.
 
-  Schematic.png
+![Device view](/Doc/Schematic.png)
 

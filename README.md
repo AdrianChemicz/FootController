@@ -79,3 +79,14 @@ Below was added connection between main microcontroller and other part of system
 
 ![Device view](/Doc/Schematic.png)
 
+Index | Pin function | Pin usage
+------------ | ------------ | -------------
+1 | GND | Ground for LED
+2 | GND | Ground connected to BC817-25W transistor emiter pin
+3 | GPIO | Output port use to control CDC LED indicator
+4 | GPIO | Output port use to control BC817-25W transistor base pin
+5 | GPIO | Output port use to debug durring development process
+6 | 3V3 | 3.3V power supply for laser sensor
+7 | SDA | I2C data pin use to comunication with laser sensor
+8 | SCL | I2C clock pin use to comunication with laser sensor
+9 | GPIO | Input port use to block send key event from laser. Connect to ground to block event.

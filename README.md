@@ -90,3 +90,49 @@ Index | Pin function | Pin usage
 7 | SDA | I2C data pin use to comunication with laser sensor
 8 | SCL | I2C clock pin use to comunication with laser sensor
 9 | GPIO | Input port use to block send key event from laser. Connect to ground to block event.
+
+## 5.Housing of device
+
+Housing of device was prepared in Blender application. Complete housing consist of two element main element and electronic board holder. To mount complete device is require put three or two nuts for screw and threaded rod to nut holes in main element. 
+
+![Main element in blender](/Doc/ViewMainElement.png)
+
+In Housing project folder was added blender files with single element and all steps(before using boolean modifier) necessary to create final element.
+
+## 6.Code design
+
+Footcontroller source code firmware was divided into few modules which was divided according to purpose. In below table was added all modules in project:
+
+Module name | Module description
+------------ | ------------
+Descriptors.h | Contain USB things like structures and information which will be visible on PC after device connection
+EEPROM_Driver.h | Provide function to read and write functions to store information about sensor activation parameters
+FootController.h | Main module with main function. Module handle USB communication like serial and HID interfaces.
+GPIO_Driver.h | Provide API for GPIO microcontrollers ports
+HW_Driver.h | Module responsible for clock microcontroller clock settings and communication with laser sensor.
+I2C_Driver.h | Provide API for I2C microcontroller interface
+iap.h | Provide API to manage EEPROM memory and flash.
+StringGenerateParseModule.h | Provide API to parse or generate strings. Functions in module are used by USB serial communication.
+
+FootController.h module between other modules share FootControllerStructure which is visible as global variable. Many functions from other modules access to field in this structure directly.
+
+To build firmware also was used ST VL53L0X API library to handle VL53L0X full sensor i2c comunication. ST library provide all necessary API to comunicate with sensor without manual call I2C API. API is available on below location:
+https://www.st.com/en/embedded-software/stsw-img005.html
+Project also use two other library which not exist in project directory but to correct compile file must be added outside. Those library are lpc_chip_11uxx_lib and nxp_lpcxpresso_11u14_usblib_device. 
+
+Project to compile without errors require from user additional steps. Assign VID and PID number in Descriptors.c file because author of project isn't usb.org member or didn't buy VID number. The same thing must be performed with FootControllerSerialDriver.inf driver file in Driver project folder. Below was added screenshot both file with marked code lines when changes must be performed. In both file VID and PID must be the same.
+
+![VID and PID](/Doc/VIDandPID.png)
+
+## 7.Execution sequence diagram
+
+On below schematic was presented how application running on footcontroller to provide overal information before deeper code analisis.
+
+![Sequence diagram](/Doc/SequenceDiagram.png)
+  
+In main function after initialization is executed in infinite loop laser sensor handling. USB process is performed in TIMER16_0_IRQHandler timer interrupt which is call every 83.5 us.
+
+## 8.Known issues
+
+-Very often device send null signs in string to PC on serial port. Issue can be cause by incorrect use NXP USB library.
+

@@ -116,8 +116,8 @@ StringGenerateParseModule.h | Provide API to parse or generate strings. Function
 
 FootController.h module between other modules share FootControllerStructure which is visible as global variable. Many functions from other modules access to field in this structure directly.
 
-To build firmware also was used ST VL53L0X API library to handle VL53L0X full sensor i2c comunication. ST library provide all necessary API to comunicate with sensor without manual call I2C API. API is available on below location:
-https://www.st.com/en/embedded-software/stsw-img005.html
+To build firmware also was used ST VL53L0X API library to handle VL53L0X full sensor i2c comunication. ST library provide all necessary API to comunicate with sensor without manual call I2C API. API is available on below location:<br />
+https://www.st.com/en/embedded-software/stsw-img005.html <br />
 Project also use two other library which not exist in project directory but to correct compile file must be added outside. Those library are lpc_chip_11uxx_lib and nxp_lpcxpresso_11u14_usblib_device. 
 
 Project to compile without errors require from user additional steps. Assign VID and PID number in Descriptors.c file because author of project isn't usb.org member or didn't buy VID number. The same thing must be performed with FootControllerSerialDriver.inf driver file in Driver project folder. Below was added screenshot both file with marked code lines when changes must be performed. In both file VID and PID must be the same.

@@ -28,10 +28,10 @@ FakeModemCopyFileSection=12
 %pXXXX%=DriverInstall, USB\VID_XXXX&PID_XXXX&MI_01
 
 [Models.NTamd64]
-%p204E%=DriverInstall, USB\VID_XXXX&PID_XXXX&MI_01
+%pXXXX%=DriverInstall, USB\VID_XXXX&PID_XXXX&MI_01
 
 [Models.NTarm]
-%p204E%=DriverInstall, USB\VID_XXXX&PID_XXXX&MI_01
+%pXXXX%=DriverInstall, USB\VID_XXXX&PID_XXXX&MI_01
 
 [DriverInstall]
 Include=mdmcpq.inf,usb.inf
